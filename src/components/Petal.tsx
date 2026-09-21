@@ -6,7 +6,6 @@ interface PetalProps {
   position: [number, number, number];
   rotationSpeed: number;
   fallSpeed: number;
-  size: number;
   delay: number;
 }
 
@@ -19,7 +18,7 @@ function createPetalShape(): THREE.Shape {
   return shape;
 }
 
-export function Petal({ position, rotationSpeed, fallSpeed, size, delay }: PetalProps) {
+export function Petal({ position, rotationSpeed, fallSpeed, delay }: PetalProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const initialY = useMemo(() => position[1], [position]);
   const petalShape = useMemo(() => createPetalShape(), []);

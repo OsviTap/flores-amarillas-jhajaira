@@ -8,7 +8,7 @@ interface PetalsCanvasProps {
 
 export function PetalsCanvas({ isActive, count = 50 }: PetalsCanvasProps) {
   const petals = useMemo(() => {
-    return Array.from({ length: count }).map((_, i) => ({
+    return Array.from({ length: count }).map(() => ({
       position: [
         (Math.random() - 0.5) * 15,
         (Math.random() - 0.5) * 10 + 5,
@@ -16,7 +16,6 @@ export function PetalsCanvas({ isActive, count = 50 }: PetalsCanvasProps) {
       ] as [number, number, number],
       rotationSpeed: Math.random() * 0.5 + 0.5,
       fallSpeed: Math.random() * 2 + 1,
-      size: Math.random() * 0.3 + 0.2,
       delay: Math.random() * 5,
     }));
   }, [count]);
