@@ -2,44 +2,31 @@ import { motion } from 'framer-motion';
 
 interface CTAButtonsProps {
   onOpenGift: () => void;
-  onSendFlowers: () => void;
   showButtons: boolean;
-  showSendButton: boolean;
 }
 
-export function CTAButtons({ onOpenGift, onSendFlowers, showButtons, showSendButton }: CTAButtonsProps) {
+export function CTAButtons({ onOpenGift, showButtons }: CTAButtonsProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: showButtons ? 1 : 0, y: showButtons ? 0 : 20 }}
-      transition={{ duration: 0.5 }}
-      className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col gap-4 items-center"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: showButtons ? 1 : 0, y: showButtons ? 0 : 30 }}
+      transition={{ duration: 0.8 }}
+      className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 flex flex-col gap-4 items-center"
     >
       {showButtons && (
-        <>
-          <motion.button
-            onClick={onOpenGift}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 font-semibold rounded-full shadow-lg hover:shadow-xl transition-all text-lg"
-          >
-            🌼 Abrir tu regalo
-          </motion.button>
-
-          {showSendButton && (
-            <motion.button
-              onClick={onSendFlowers}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 2.5, duration: 0.5 }}
-              className="px-6 py-3 bg-white/20 backdrop-blur-sm text-yellow-50 border-2 border-yellow-200/50 font-medium rounded-full hover:bg-white/30 transition-all"
-            >
-              💛 Enviar flores a Jhajaira
-            </motion.button>
-          )}
-        </>
+        <motion.button
+          onClick={onOpenGift}
+          whileHover={{ scale: 1.08, boxShadow: '0 0 40px rgba(251,191,36,0.6)' }}
+          whileTap={{ scale: 0.95 }}
+          className="px-10 py-4 font-semibold rounded-full shadow-xl transition-all text-lg tracking-wide"
+          style={{
+            background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)',
+            color: '#451a03',
+            boxShadow: '0 4px 30px rgba(251,191,36,0.4), inset 0 1px 0 rgba(255,255,255,0.3)',
+          }}
+        >
+          🌼 Abrir tu regalo
+        </motion.button>
       )}
     </motion.div>
   );
