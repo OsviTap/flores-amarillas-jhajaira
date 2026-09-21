@@ -31,7 +31,19 @@ function formatTimeLeft(ms: number): string {
   return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+  return isMobile;
+}
+
 export default function App() {
+  const isMobile = useIsMobile();
   const [isBlooming, setIsBlooming] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
   const [isCouponOpen, setIsCouponOpen] = useState(false);
@@ -71,25 +83,31 @@ export default function App() {
   setTimeout(() => setShowButtons(true), 1500);
 
   return (
-    <div className="w-full h-screen relative overflow-hidden" style={{
+    <div className="w-full h-[100dvh] sm:h-screen relative overflow-hidden" style={{
       background: 'linear-gradient(180deg, #0a1628 0%, #0d2847 30%, #0e3d5e 50%, #0d4f6e 70%, #1a6b6e 100%)'
     }}>
       <div className="absolute inset-0" style={{
         background: 'radial-gradient(ellipse at center bottom, rgba(64,224,208,0.1) 0%, transparent 60%)'
       }} />
 
-      <Canvas camera={{ position: [0, 0.8, 5], fov: 45 }} style={{ position: 'absolute', inset: 0, background: 'transparent' }}>
+      <Canvas
+        camera={{
+          position: isMobile ? [0, 1.2, 6.5] : [0, 0.8, 5],
+          fov: isMobile ? 55 : 45,
+        }}
+        style={{ position: 'absolute', inset: 0, background: 'transparent' }}
+      >
         <fog attach="fog" args={['#0d2847', 10, 30]} />
 
-        <ambientLight intensity={0.4} color="#fef3c7" />
-        <directionalLight position={[2, 4, 3]} intensity={2} color="#fef3c7" castShadow />
-        <pointLight position={[-2, 2, 2]} intensity={0.8} color="#fbbf24" distance={8} />
-        <pointLight position={[1.5, 1, -1.5]} intensity={0.4} color="#f472b6" distance={6} />
-        <pointLight position={[0, 2, 0]} intensity={0.6} color="#fef9c3" distance={10} />
-        <pointLight position={[0, -1, 2]} intensity={0.3} color="#fde68a" distance={5} />
+        <ambientLight intensity={0.4} color="#e0f7fa" />
+        <directionalLight position={[2, 4, 3]} intensity={2} color="#e0f7fa" castShadow />
+        <pointLight position={[-2, 2, 2]} intensity={0.8} color="#40e0d0" distance={8} />
+        <pointLight position={[1.5, 1, -1.5]} intensity={0.4} color="#20b2aa" distance={6} />
+        <pointLight position={[0, 2, 0]} intensity={0.6} color="#e0f7fa" distance={10} />
+        <pointLight position={[0, -1, 2]} intensity={0.3} color="#40e0d0" distance={5} />
 
         <Flower3D isBlooming={isBlooming} />
-        <PetalsCanvas isActive={isBlooming} count={80} />
+        <PetalsCanvas isActive={isBlooming} count={isMobile ? 40 : 80} />
 
         <EffectComposer>
           <Bloom

@@ -9,13 +9,19 @@
 html, body, #root {
   width: 100%;
   height: 100%;
+  height: 100dvh;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background: #0a0a1a;
-  color: #fef3c7;
+  background: #0a1628;
+  color: #e0f7fa;
+  overscroll-behavior: none;
 }
 
 h1, h2, h3, .serif {
@@ -23,10 +29,14 @@ h1, h2, h3, .serif {
 }
 
 ::selection {
-  background: rgba(251, 191, 36, 0.3);
-  color: #fef3c7;
+  background: rgba(64, 224, 208, 0.3);
+  color: #e0f7fa;
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
 }
