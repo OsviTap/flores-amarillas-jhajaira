@@ -11,7 +11,7 @@ export function CTAButtons({ onOpenGift, showButtons }: CTAButtonsProps) {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: showButtons ? 1 : 0, y: showButtons ? 0 : 30 }}
       transition={{ duration: 0.8 }}
-      className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-1/2 transform -translate-x-1/2 z-20"
+      className="absolute bottom-20 sm:bottom-24 md:bottom-10 left-1/2 transform -translate-x-1/2 z-20"
     >
       {showButtons && (
         <motion.button
